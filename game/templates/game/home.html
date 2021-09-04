@@ -1,0 +1,83 @@
+{% extends 'game/base.html' %}
+
+{% block body %}
+	<br>
+	<p class="text-start text-light">Your Gold: <span class="badge bg-warning text-wrap fw-bold text-dark">{{ gold }}</span></p>
+	<div class="row text-center">
+		<div class="col-sm-3">
+			<div class="card">
+				<div class="card-body">
+				<h5 class="card-title">Farm</h5>
+				<p class="card-text">(earns 10-20 coins)</p>
+				<!-- Mediante formulario -->
+				<form method="post" action="process_money">
+				{% csrf_token %}
+					<input name="actions" type="hidden" value="farm">
+					<input type="submit" class="btn btn-success value" value="Find Gold!">
+				</form>
+					<!-- <a href="#" class="btn btn-success">Go somewhere</a> -->
+				</div>
+			</div>
+		</div>
+		<div class="col-sm-3">
+			<div class="card">
+				<div class="card-body">
+				<h5 class="card-title">Cave</h5>
+				<p class="card-text">(earns 5-10 coins)</p>
+				<!-- Mediante formulario -->
+				<form method="post" action="process_money">
+				{% csrf_token %}
+					<input name="actions" type="hidden" value="cave">
+					<input type="submit" class="btn btn-success value" value="Find Gold!">
+				</form>
+					<!-- <a href="#" class="btn btn-success">Go somewhere</a> -->
+				</div>
+			</div>
+		</div>
+		<div class="col-sm-3">
+			<div class="card">
+				<div class="card-body">
+				<h5 class="card-title">House</h5>
+				<p class="card-text">(earns 2-5 coins)</p>
+				<!-- Mediante formulario -->
+				<form method="post" action="process_money">
+				{% csrf_token %}
+					<input name="actions" type="hidden" value="house">
+					<input type="submit" class="btn btn-success value" value="Find Gold!">
+				</form>
+					<!-- <a href="#" class="btn btn-success">Go somewhere</a> -->
+				</div>
+			</div>
+		</div>
+		<div class="col-sm-3">
+			<div class="card">
+				<div class="card-body">
+				<h5 class="card-title">Casino</h5>
+				<p class="card-text">(earns/take 0-20 coins)</p>
+				<!-- Mediante formulario -->
+				<form method="post" action="process_money">
+				{% csrf_token %}
+					<input name="actions" type="hidden" value="casino">
+					<input type="submit" class="btn btn-success value" value="Find Gold!">
+				</form>
+					<!-- <a href="#" class="btn btn-success">Go somewhere</a> -->
+				</div>
+			</div>
+		</div>
+	</div>
+	<br>
+		<p class="text-light">Activities:</p>
+		<div id="log" class="fluid h-50 overflow-auto">
+			<div class="card">
+				<div class="card-body">
+					{% for log in log_list %}
+						{% if log.type == "won"%}
+							<p class="card-text text-success">{{ log.text }}</p>
+						{% else %}
+							<p class="card-text text-danger">{{ log.text }}</p>
+						{% endif%}
+					{% endfor %}
+				</div>
+			</div>
+		</div>
+{% endblock %}
